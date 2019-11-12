@@ -1,0 +1,66 @@
+<?php
+
+namespace E7\JsonApi\Document;
+
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+use Traversable;
+
+/**
+ * class Collection
+ * @package E7\JsonApi\Document
+ */
+abstract class Collection extends AbstractElement implements Countable, IteratorAggregate
+{
+    private $elements = [];
+
+    /**
+     * @param ElementInterface $element
+     * @return Collection
+     */
+    public function add(ElementInterface $element)
+    {
+        $this->elements[] = $element;
+        
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEmpty(): bool
+    {
+        return epmty($this->elements);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
+    {
+        return count($this->elements);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->elements);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        $array = [];
+
+        foreach ($this as $element) {
+            $array[$element->getKey()] = $element->getValue();
+        }
+
+        return $array;
+    }
+}
