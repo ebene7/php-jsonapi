@@ -15,6 +15,8 @@ use E7\JsonApi\Document\Relationship;
 use E7\JsonApi\Document\Data;
 use E7\JsonApi\Document\JsonApi;
 use E7\JsonApi\Document\Meta;
+use E7\JsonApi\Request\Request;
+use PHPUnit\TextUI\ResultPrinter;
 
 //$attr = new Attributes();
 //$attr->add(new KeyValue('answer', 42));
@@ -32,20 +34,24 @@ use E7\JsonApi\Document\Meta;
 //
 //echo get_class($element) . ' # ' . json_encode($element);
 
-$doc = new Document();
-$meta = new Meta();
-$meta->add(new KeyValue('fooo', 'baar'));
-$errors = new Errors();
-$errors->add((new Error())->setTitle('Doofer Fehler'));
+//$doc = new Document();
+//$meta = new Meta();
+//$meta->add(new KeyValue('fooo', 'baar'));
+//$errors = new Errors();
+//$errors->add((new Error())->setTitle('Doofer Fehler'));
+//
+//$doc->setData(new Data())
+//        ->setJsonApi(new JsonApi())
+//        ->setIncluded(new E7\JsonApi\Document\Included())
+//        ->setLinks(new Links())
+//        ->setMeta($meta)
+//        ->setErrors($errors);
+//
+//        ;
+//echo "\n\n\n" . get_class($doc) . ' # ' . json_encode($doc) . "\n\n\n";
 
-$doc->setData(new Data())
-        ->setJsonApi(new JsonApi())
-        ->setIncluded(new E7\JsonApi\Document\Included())
-        ->setLinks(new Links())
-        ->setMeta($meta)
-        ->setErrors($errors);
-        
-        ;
 
+$request = Request::createFromGlobals();
 
-echo get_class($doc) . ' # ' . json_encode($doc);
+print_r($request);
+
