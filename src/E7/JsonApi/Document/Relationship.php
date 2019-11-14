@@ -43,6 +43,88 @@ class Relationship extends AbstractElement
     }
 
     /**
+     * Set relation
+     *
+     * @param string $relation
+     * @return Relationship
+     */
+    public function setRelation($relation): Relationship
+    {
+        $this->relation = $relation;
+
+        return $this;
+    }
+
+    /**
+     * Get relation
+     *
+     * @return string
+     */
+    public function getRelation(): string
+    {
+        return $this->relation;
+    }
+
+    /**
+     * Set data
+     *
+     * @param Data $data
+     * @return Relationship
+     */
+    public function setData(Data $data): Relationship
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return Data
+     */
+    public function getData(): Data
+    {
+        return $this->data;
+    }
+
+    /**
+     * Set links
+     *
+     * @param Links $links
+     * @return Relationship
+     */
+    public function setLinks(Links $links): Relationship
+    {
+        $this->links = $links;
+
+        return $this;
+    }
+
+    /**
+     * Get links
+     *
+     * @return Links
+     */
+    public function getLinks(): Links
+    {
+        return $this->links;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromArray(array $data): AbstractElement
+    {
+        if (!empty($data['data'])) {
+            $dataElement = new Data();
+            $dataElement->fromArray($data['data']);
+            $this->setData($dataElement);
+        }
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray(): array

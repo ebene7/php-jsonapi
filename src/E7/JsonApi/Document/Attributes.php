@@ -15,4 +15,16 @@ class Attributes extends Collection
     {
         return 'attributes';
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromArray(array $data): AbstractElement
+    {
+        foreach ($data as $key => $value) {
+            $this->add(new KeyValue($key, $value));
+        }
+
+        return $this;
+    }
 }

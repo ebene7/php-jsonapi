@@ -133,6 +133,7 @@ class Document extends AbstractElement
     public function setMeta(Meta $meta): Document
     {
         $this->meta = $meta;
+
         return $this;
     }
 
@@ -155,6 +156,7 @@ class Document extends AbstractElement
     public function setLinks(Links $links): Document
     {
         $this->links = $links;
+
         return $this;
     }
 
@@ -177,6 +179,7 @@ class Document extends AbstractElement
     public function setIncluded(Included $included): Document
     {
         $this->included = $included;
+
         return $this;
     }
 
@@ -199,6 +202,7 @@ class Document extends AbstractElement
     public function setJsonApi(JsonApi $jsonApi): Document
     {
         $this->jsonApi = $jsonApi;
+
         return $this;
     }
     
@@ -209,6 +213,50 @@ class Document extends AbstractElement
     public function getJsonApi(): JsonApi
     {
         return $this->jsonApi;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromArray(array $data): AbstractElement
+    {
+        if (!empty($data['jsonapi'])) {
+            $jsonApi = new JsonApi();
+            $jsonApi->fromArray($data['jsonapi']);
+            $this->setJsonApi($jsonApi);
+        }
+
+        if (!empty($data['data'])) {
+            $dataElement = new Data();
+            $dataElement->fromArray($data['data']);
+            $this->setData($dataElement);
+        }
+
+        if (!empty($data['errors'])) {
+            $errors = new Errors();
+            $errors->fromArray($data['errors']);
+            $this->setErrors($errors);
+        }
+
+        if (!empty($data['included'])) {
+            $included = new Included();
+            $included->fromArray($data['included']);
+            $this->setIncluded($included);
+        }
+
+        if (!empty($data['links'])) {
+            $links = new Links();
+            $links->fromArray($data['links']);
+            $this->setLinks($links);
+        }
+
+        if (!empty($data['meta'])) {
+            $meta = new Meta();
+            $meta->fromArray($data['meta']);
+            $this->setMeta($meta);
+        }
+
+        return $this;
     }
 
     /**

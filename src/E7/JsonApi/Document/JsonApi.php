@@ -22,7 +22,7 @@ class JsonApi extends AbstractElement
     
     /**
      * Constructor
-     * 
+     *
      * @param string $version
      */
     public function __construct(string $version = self::VERSION_1_0)
@@ -36,6 +36,41 @@ class JsonApi extends AbstractElement
     public function getKey(): string
     {
         return 'jsonapi';
+    }
+
+    /**
+     * Set version
+     *
+     * @param string $version
+     * @return JsonApi
+     */
+    public function setVersion($version): JsonApi
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    /**
+     * Get Version
+     *
+     * @return string
+     */
+    public function getVersion(): string
+    {
+        return $this->version;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromArray(array $data): AbstractElement
+    {
+        if (!empty($data['version'])) {
+            $this->setVersion($data['version']);
+        }
+
+        return $this;
     }
     
     /**

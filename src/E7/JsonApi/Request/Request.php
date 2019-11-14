@@ -20,6 +20,8 @@ class Request
     /** @var Page */
     private $page;
 
+    private $content;
+
     /**
      * Constructor
      *
@@ -40,7 +42,7 @@ class Request
         array $server = [],
         $content = null
     ) {
-        $this->init($query, $request, $attributes, $cookies, $files, $server , $content);
+        $this->init($query, $request, $attributes, $cookies, $files, $server, $content);
     }
 
     /**
@@ -68,6 +70,9 @@ class Request
 
         $this->initInclude($query);
 
+        if (!empty($content)) {
+            $this->content = new Content($content);
+        }
 //        print_r($server);
     }
 
@@ -87,7 +92,7 @@ class Request
      */
     public static function createFromGlobals()
     {
-        $content = null;
+        $content = file_get_contents('php://input');
 
         return new static($_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER, $content);
     }

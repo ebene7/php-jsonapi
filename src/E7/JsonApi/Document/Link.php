@@ -17,13 +17,13 @@ class Link extends AbstractElement
     
     /** @var string */
     private $relation;
-    
+
     /** @var string */
     private $url;
-    
+
     /** @var Meta */
     private $meta;
-    
+
     /**
      * Constructor
      * 
@@ -37,7 +37,7 @@ class Link extends AbstractElement
         $this->url = $url;
         $this->meta = $meta;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -54,6 +54,64 @@ class Link extends AbstractElement
         return $this->hasMeta() ? $this->toArray() : $this->url;
     }
 
+    public function setRelation($relation): Link
+    {
+        $this->relation = $relation;
+
+        return $this;
+    }
+
+    public function getRelation()
+    {
+        return $this->relation;
+    }
+
+    public function setUrl($url): Link
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setMeta(Meta $meta): Link
+    {
+        $this->meta = $meta;
+
+        return $this;
+    }
+
+    public function getMeta(): Meta
+    {
+        return $this->meta;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromArray(array $data): AbstractElement
+    {
+        if (!empty($data['relation'])) {
+            $this->setRelation($data['relation']);
+        }
+
+        if (!empty($data['url'])) {
+            $this->setUrl($data['url']);
+        }
+
+        if (!empty($data['meta'])) {
+            $meta = new Meta();
+            $meta->fromArray($data['meta']);
+            $this->setMeta($meta);
+        }
+
+        return $this;
+    }
+
     /**
      * @inheritDoc
      */
@@ -64,7 +122,7 @@ class Link extends AbstractElement
             'meta' => $this->hasMeta() ? $this->meta->getValue() : [],
         ];
     }
-    
+
     /**
      * @return boolean
      */

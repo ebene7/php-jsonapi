@@ -15,4 +15,20 @@ class Links extends Collection
     {
         return 'links';
     }
+
+    public function fromArray(array $data): AbstractElement
+    {
+        // @TODO: Add checks!
+        foreach ($data as $relation => $value) {
+            if (is_string($value)) {
+                $link = new Link($relation, $value);
+            } else {
+                $link = new Link($relation, $value['href']);
+                $link->fromArray(['meta' => $value['meta']]);
+            }
+            $this->add($link);
+        }
+
+        return $this;
+    }
 }

@@ -10,14 +10,8 @@ use E7\JsonApi\Document\Relationships;
  * Class Resource
  * @package E7\JsonApi\Document
  */
-class Resource extends AbstractElement
+class Resource extends ResourceIdentifier
 {
-    /** @var string */
-    private $type;
-    
-    /** @var string */
-    private $id;
-    
     /** @var Attributes */
     private $attributes;
     
@@ -43,8 +37,7 @@ class Resource extends AbstractElement
         Relationships $relationships = null,
         Links $links = null
     ) {
-        $this->type = $type;
-        $this->id = $id;
+        parent::__construct($type, $id);
         $this->attributes = $attributes;
         $this->relationships = $relationships;
         $this->links = $links;
@@ -59,20 +52,103 @@ class Resource extends AbstractElement
     }
 
     /**
+     * Set attributes
+     *
+     * @param Attributes $attributes
+     * @return Resource
+     */
+    public function setAttributes(Attributes $attributes): Resource
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * Get attributes
+     *
+     * @return Attributes
+     */
+    public function getAttributes(): Attributes
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Set relationships
+     *
+     * @param Relationships $relationships
+     * @return Resource
+     */
+    public function setRelationships(Relationships $relationships): Resource
+    {
+        $this->relationships = $relationships;
+
+        return $this;
+    }
+
+    /**
+     * Get relationships
+     *
+     * @return Relationships
+     */
+    public function getRelationships(): Relationships
+    {
+        return $this->relationships;
+    }
+
+    /**
+     * Set links
+     *
+     * @param Links $links
+     * @return Resource
+     */
+    public function setLinks(Links $links): Resource
+    {
+        $this->links = $links;
+
+        return $this;
+    }
+
+    /**
+     * Get links
+     *
+     * @return Links
+     */
+    public function getLinks(): Links
+    {
+        return $this->links;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromArray(array $data): AbstractElement
+    {
+        parent::fromArray($data);
+        
+        if (!empty($data['attributes'])) {
+            $attributes = new Attributes();
+            $attributes->fromArray($data['attributes']);
+            $this->setAttributes($attributes);
+        }
+
+        if (!empty($data['relationships'])) {
+            $relationships = new Relationships();
+            $relationships->fromArray($data['relationships']);
+            $this->setRelationships($relationships);
+        }
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray():array
     {
-        $data = [];
-        
-        if (null !== $this->type) {
-            $data['type'] = $this->type;
-        }
-        
-        if (null !== $this->id) {
-            $data['id'] = $this->id;
-        }
-        
+        $data = parent::toArray();
+
         if (null !== $this->attributes) {
             $data[$this->attributes->getKey()] = $this->attributes->getValue();
         }
@@ -84,8 +160,7 @@ class Resource extends AbstractElement
         if (null !== $this->links) {
             $data[$this->links->getKey()] = $this->links->getValue();
         }        
-        
+
         return $data;
     }
-
 }
