@@ -6,7 +6,7 @@ namespace E7\JsonApi\Document;
  * Class Data
  * @package E7\JsonApi\Document
  */
-class Data extends Collection
+class Data extends AbstractResourceCollection
 {
     /** @var boolean */
     private $forceArray;
@@ -27,37 +27,5 @@ class Data extends Collection
     public function getKey(): string
     {
         return 'data';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function fromArray(array $data): AbstractElement
-    {
-        if (array_key_exists('type', $data)) {
-            return $this->fromArray([$data]);
-        }
-
-        foreach ($data as $index => $item) {
-            $resource = new Resource();
-            $resource->fromArray($item);
-            $this->add($resource);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray(): array
-    {
-        $array = [];
-
-        foreach ($this as $element) {
-            $array[] = $element->getValue();
-        }
-
-        return $array;
     }
 }

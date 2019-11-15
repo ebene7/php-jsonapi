@@ -31,7 +31,7 @@ class Link extends AbstractElement
      * @param string $url
      * @param type $meta
      */
-    public function __construct(string $relation, string $url, Meta $meta = null)
+    public function __construct(string $relation = null, string $url = null, Meta $meta = null)
     {
         $this->relation = $relation;
         $this->url = $url;
@@ -54,30 +54,58 @@ class Link extends AbstractElement
         return $this->hasMeta() ? $this->toArray() : $this->url;
     }
 
-    public function setRelation($relation): Link
+    /**
+     * Set relation
+     *
+     * @param string $relation
+     * @return Link
+     */
+    public function setRelation(string $relation): Link
     {
         $this->relation = $relation;
 
         return $this;
     }
 
-    public function getRelation()
+    /**
+     * Get relation
+     *
+     * @return string
+     */
+    public function getRelation(): string
     {
         return $this->relation;
     }
 
-    public function setUrl($url): Link
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Link
+     */
+    public function setUrl(string $url): Link
     {
         $this->url = $url;
 
         return $this;
     }
 
-    public function getUrl()
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl(): string
     {
         return $this->url;
     }
 
+    /**
+     * Set meta
+     *
+     * @param Meta $meta
+     * @return Link
+     */
     public function setMeta(Meta $meta): Link
     {
         $this->meta = $meta;
@@ -85,6 +113,11 @@ class Link extends AbstractElement
         return $this;
     }
 
+    /**
+     * Get meta
+     *
+     * @return Meta
+     */
     public function getMeta(): Meta
     {
         return $this->meta;

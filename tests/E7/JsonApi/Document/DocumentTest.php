@@ -113,7 +113,7 @@ class DocumentTest extends ElementTestCase
         $element = new Document();
         $element->fromArray($data);
         
-        print_r($element);
+        print_r($element->toArray());
         print_r(json_encode($element));
         
         

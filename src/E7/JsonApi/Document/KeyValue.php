@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace E7\JsonApi\Document;
 
 /**
@@ -33,13 +27,39 @@ class KeyValue extends AbstractElement
     }
 
     /**
+     * Set key
+     *
+     * @param string $key
+     * @return KeyValue
+     */
+    public function setKey(string $key): KeyValue
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getKey(): string
     {
         return $this->key;
     }
-    
+
+    /**
+     * Set value
+     *
+     * @param mixed $value
+     * @return \E7\JsonApi\Document\KeyValue
+     */
+    public function setValue($value): KeyValue
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
     /**
      * @inheritDoc
      */

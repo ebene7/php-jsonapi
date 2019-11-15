@@ -128,15 +128,11 @@ class Resource extends ResourceIdentifier
         parent::fromArray($data);
         
         if (!empty($data['attributes'])) {
-            $attributes = new Attributes();
-            $attributes->fromArray($data['attributes']);
-            $this->setAttributes($attributes);
+            $this->setAttributes($this->createOrPassElement(Attributes::class, $data['attributes']));
         }
 
         if (!empty($data['relationships'])) {
-            $relationships = new Relationships();
-            $relationships->fromArray($data['relationships']);
-            $this->setRelationships($relationships);
+            $this->setRelationships($this->createOrPassElement(Relationships::class, $data['relationships']));
         }
 
         return $this;

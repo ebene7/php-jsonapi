@@ -23,5 +23,5 @@ interface FactoryInterface
      * @return ElementInterface
      * @throws InvalidArgumentException
      */
-    public function createOrUse(string $class, $data): ElementInterface;
+    public function createOrPassElement(string $class, $data): ElementInterface;
 }

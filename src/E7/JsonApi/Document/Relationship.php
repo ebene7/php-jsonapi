@@ -13,13 +13,13 @@ class Relationship extends AbstractElement
 {
     /** @var string */
     private $relation;
-    
+
     /** @var Data */
     private $data;
-    
+
     /** @var Links */
     private $links;
-    
+
     /**
      * Constructor
      *
@@ -27,7 +27,7 @@ class Relationship extends AbstractElement
      * @param Data $data
      * @param Links $links
      */
-    public function __construct(string $relation, Data $data = null, Links $links = null)
+    public function __construct(string $relation = null, Data $data = null, Links $links = null)
     {
         $this->relation = $relation;
         $this->data = $data;
@@ -116,11 +116,16 @@ class Relationship extends AbstractElement
      */
     public function fromArray(array $data): AbstractElement
     {
+        if (!empty($data['relation'])) {
+            $this->setRelation($data['relation']);
+        }
+
         if (!empty($data['data'])) {
             $dataElement = new Data();
             $dataElement->fromArray($data['data']);
             $this->setData($dataElement);
         }
+
         return $this;
     }
 
@@ -134,12 +139,11 @@ class Relationship extends AbstractElement
         if (null !== $this->links) {
             $array[$this->links->getKey()] = $this->links->getValue();
         }
-        
+
         if (null !== $this->data) {
             $array[$this->data->getKey()] = $this->data->getValue();
         }
-        
+
         return $array;
     }
-    
 }

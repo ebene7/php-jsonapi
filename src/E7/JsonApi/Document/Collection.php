@@ -4,6 +4,7 @@ namespace E7\JsonApi\Document;
 
 use ArrayIterator;
 use Countable;
+use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
 
@@ -13,14 +14,21 @@ use Traversable;
  */
 abstract class Collection extends AbstractElement implements Countable, IteratorAggregate
 {
+    /** @var array */
     private $elements = [];
 
     /**
      * @param ElementInterface $element
      * @return Collection
+     * @throws InvalidArgumentException
      */
     public function add(ElementInterface $element)
     {
+        if (!$this->accept($element)) {
+            throw new InvalidArgumentException(
+                sprintf('The given element cannot be added (%s)', get_class($element))
+            );
+        }
         $this->elements[] = $element;
         
         return $this;
@@ -62,5 +70,16 @@ abstract class Collection extends AbstractElement implements Countable, Iterator
         }
 
         return $array;
+    }
+
+    /**
+     * Check, if the given element is accepted to be added
+     *
+     * @param ElementInterface $element
+     * @return bool
+     */
+    protected function accept(ElementInterface $element): bool
+    {
+        return true;
     }
 }

@@ -16,6 +16,9 @@ class Links extends Collection
         return 'links';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function fromArray(array $data): AbstractElement
     {
         // @TODO: Add checks!

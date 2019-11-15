@@ -22,9 +22,8 @@ class Relationships extends Collection
     public function fromArray(array $data): AbstractElement
     {
         foreach ($data as $key => $value) {
-            $relation = new Relationship($key);
-            $relation->fromArray($value);
-            $this->add($relation);
+            $value['relation'] = $key;
+            $this->add($this->createOrPassElement(Relationship::class, $value));
         }
 
         return $this;

@@ -23,9 +23,7 @@ class Errors extends Collection
     {
         // @TODO: Add checks!
         foreach ($data as $item) {
-            $error = new Error();
-            $error->fromArray($item);
-            $this->add($error);
+            $this->add($this->createOrPassElement(Error::class, $item));
         }
 
         return $this;

@@ -266,23 +266,17 @@ class Error extends AbstractElement
     public function fromArray(array $data): AbstractElement
     {
         if (!empty($data['links'])) {
-            $links = new Links();
-            $links->fromArray($data['links']);
-            $this->setLinks($links);
+            $this->setLinks($this->createOrPassElement(Links::class, $data['links']));
             unset($data['links']);
         }
 
         if (!empty($data['meta'])) {
-            $meta = new Meta();
-            $meta->fromArray($data['meta']);
-            $this->setMeta($meta);
+            $this->setMeta($this->createOrPassElement(Meta::class, $data['meta']));
             unset($data['meta']);
         }
 
         if (!empty($data['source'])) {
-            $source = new Error\Source();
-            $source->fromArray($data['source']);
-            $this->setSource($source);
+            $this->setSource($this->createOrPassElement(Source::class, $data['source']));
             unset($data['source']);
         }
 

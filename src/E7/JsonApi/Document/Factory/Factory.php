@@ -27,7 +27,7 @@ class Factory implements FactoryInterface
     /**
      * @inheritDoc
      */
-    public function createOrUse(string $class, $data): ElementInterface
+    public function createOrPassElement(string $class, $data): ElementInterface
     {
         $class = $this->getMappedClass($class);
         

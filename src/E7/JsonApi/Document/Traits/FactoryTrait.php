@@ -14,10 +14,10 @@ trait FactoryTrait
 {
     /** @var FactoryInterface */
     private static $factory;
-    
+
     /**
      * Set factory
-     * 
+     *
      * @param FactoryInterface $factory
      * @return void
      */
@@ -25,10 +25,10 @@ trait FactoryTrait
     {
         self::$factory = $factory;
     }
-    
+
     /**
      * Get factory
-     * 
+     *
      * @return FactoryInterface
      */
     protected static function getFactory()
@@ -36,12 +36,13 @@ trait FactoryTrait
         if (null === self::$factory) {
             self::$factory = new Factory();
         }
+
         return self::$factory;
     }
     
     /**
      * Factory
-     * 
+     *
      * @param array $data
      * @return ElementInterface
      */
@@ -52,12 +53,22 @@ trait FactoryTrait
     
     /**
      * Factory
-     * 
+     *
      * @param string $json
      * @return ElementInterface
      */
     public static function createFromJson(string $json): ElementInterface
     {
         return self::createFromArray(json_decode($json, true));
+    }
+
+    /**
+     * Factory delegation
+     *
+     * @see FactoryInterface::createOrPassElement()
+     */
+    protected function createOrPassElement(string $class, $data): ElementInterface
+    {
+        return self::getFactory()->createOrPassElement($class, $data);
     }
 }

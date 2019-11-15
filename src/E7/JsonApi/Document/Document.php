@@ -221,39 +221,27 @@ class Document extends AbstractElement
     public function fromArray(array $data): AbstractElement
     {
         if (!empty($data['jsonapi'])) {
-            $jsonApi = new JsonApi();
-            $jsonApi->fromArray($data['jsonapi']);
-            $this->setJsonApi($jsonApi);
+            $this->setJsonApi($this->createOrPassElement(JsonApi::class, $data['jsonapi']));
         }
 
         if (!empty($data['data'])) {
-            $dataElement = new Data();
-            $dataElement->fromArray($data['data']);
-            $this->setData($dataElement);
+            $this->setData($this->createOrPassElement(Data::class, $data['data']));
         }
 
         if (!empty($data['errors'])) {
-            $errors = new Errors();
-            $errors->fromArray($data['errors']);
-            $this->setErrors($errors);
+            $this->setErrors($this->createOrPassElement(Errors::class, $data['errors']));
         }
 
         if (!empty($data['included'])) {
-            $included = new Included();
-            $included->fromArray($data['included']);
-            $this->setIncluded($included);
+            $this->setIncluded($this->createOrPassElement(Included::class, $data['included']));
         }
 
         if (!empty($data['links'])) {
-            $links = new Links();
-            $links->fromArray($data['links']);
-            $this->setLinks($links);
+            $this->setLinks($this->createOrPassElement(Links::class, $data['links']));
         }
 
         if (!empty($data['meta'])) {
-            $meta = new Meta();
-            $meta->fromArray($data['meta']);
-            $this->setMeta($meta);
+            $this->setMeta($this->createOrPassElement(Meta::class, $data['meta']));
         }
 
         return $this;
