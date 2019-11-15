@@ -34,4 +34,20 @@ class Links extends Collection
 
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function accept(ElementInterface $element): bool
+    {
+        return $element instanceof Link;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getElementKey(ElementInterface $element)
+    {
+        return $element->getRelation();
+    }
 }

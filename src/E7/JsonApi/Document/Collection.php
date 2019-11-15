@@ -29,8 +29,13 @@ abstract class Collection extends AbstractElement implements Countable, Iterator
                 sprintf('The given element cannot be added (%s)', get_class($element))
             );
         }
-        $this->elements[] = $element;
-        
+
+        if (null !== ($key = $this->getElementKey($element))) {
+            $this->elements[$key] = $element;
+        } else {
+            $this->elements[] = $element;
+        }
+
         return $this;
     }
 
@@ -81,5 +86,14 @@ abstract class Collection extends AbstractElement implements Countable, Iterator
     protected function accept(ElementInterface $element): bool
     {
         return true;
+    }
+
+    /**
+     * @param ElementInterface $element
+     * @return null|string
+     */
+    protected function getElementKey(ElementInterface $element)
+    {
+        return null;
     }
 }

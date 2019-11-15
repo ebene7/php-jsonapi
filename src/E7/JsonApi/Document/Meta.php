@@ -27,4 +27,12 @@ class Meta extends Collection
 
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getElementKey(ElementInterface $element)
+    {
+        return $element->getKey();
+    }
 }

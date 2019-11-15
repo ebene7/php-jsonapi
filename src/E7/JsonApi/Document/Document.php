@@ -149,7 +149,7 @@ class Document extends AbstractElement
 
     /**
      * Set links
-     * 
+     *
      * @param Links $links
      * @return Document
      */
@@ -162,12 +162,33 @@ class Document extends AbstractElement
 
     /**
      * Get links
-     * 
+     *
      * @return Links|null
      */
-    public function getLinks(): Links
+    public function getLinks()
     {
         return $this->links;
+    }
+
+    public function addLink($relation, string $url = null, Meta $meta = null)
+    {
+        if (is_string($relation) && !empty($url)) {
+            // @TODO: extend factory
+            $relation = new Link($relation, $url, $meta);
+        }
+
+        if (!$relation instanceof Link) {
+            throw new \InvalidArgumentException('');
+        }
+
+        if (null === $this->getLinks()) {
+            // @TODO: use factory
+            $this->setLinks(new Links());
+        }
+
+        $this->getLinks()->add($relation);
+
+        return $this;
     }
 
     /**
@@ -213,6 +234,19 @@ class Document extends AbstractElement
     public function getJsonApi(): JsonApi
     {
         return $this->jsonApi;
+    }
+
+    /**
+     * Add JSON:API header
+     *
+     * @param string $version
+     * @return Document
+     */
+    public function addJsonApiHeader(string $version = null): Document
+    {
+        $version = $version ?: JsonApi::VERSION_1_0;
+        $jsonApi = JsonApi::createFromArray(['version' => $version]);
+        return $this->setJsonApi($jsonApi);
     }
 
     /**

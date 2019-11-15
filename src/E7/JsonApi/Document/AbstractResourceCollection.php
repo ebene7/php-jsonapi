@@ -45,4 +45,12 @@ abstract class AbstractResourceCollection extends Collection
     {
         return $element instanceof Resource;
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getElementKey(ElementInterface $element)
+    {
+        return sprintf("%s-%s", $element->getType(), $element->getId());
+    }
 }
