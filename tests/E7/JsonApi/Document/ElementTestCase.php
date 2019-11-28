@@ -31,16 +31,17 @@ class ElementTestCase extends TestCase
         
         $this->assertInstanceOf($class, $element);
     }
-    
+
     /**
      * Test template
-     * 
+     *
      * @param object $element
+     * @param string $expectedKey
      */
-    protected function doTestGetKey($element)
+    protected function doTestGetKey($element, string $expectedKey)
     {
         $this->assertTrue(method_exists($element, 'getKey'));
         $this->assertInternalType('string', $element->getKey());
-        $this->assertNotEmpty($element->getKey());
+        $this->assertEquals($expectedKey, $element->getKey());
     }
 }

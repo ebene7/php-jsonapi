@@ -4,6 +4,8 @@ namespace E7\JsonApi\Document;
 
 use E7\JsonApi\Document\Data;
 use E7\JsonApi\Document\Links;
+use E7\JsonApi\Document\Traits\DataAwareTrait;
+use E7\JsonApi\Document\Traits\LinksAwareTrait;
 
 /**
  * Class Relationship
@@ -11,14 +13,11 @@ use E7\JsonApi\Document\Links;
  */
 class Relationship extends AbstractElement
 {
+    use DataAwareTrait;
+    use LinksAwareTrait;
+
     /** @var string */
     private $relation;
-
-    /** @var Data */
-    private $data;
-
-    /** @var Links */
-    private $links;
 
     /**
      * Constructor
@@ -30,8 +29,8 @@ class Relationship extends AbstractElement
     public function __construct(string $relation = null, Data $data = null, Links $links = null)
     {
         $this->relation = $relation;
-        $this->data = $data;
-        $this->links = $links;
+        $this->setData($data);
+        $this->setLinks($links);
     }
 
     /**
@@ -66,52 +65,6 @@ class Relationship extends AbstractElement
     }
 
     /**
-     * Set data
-     *
-     * @param Data $data
-     * @return Relationship
-     */
-    public function setData(Data $data): Relationship
-    {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    /**
-     * Get data
-     *
-     * @return Data
-     */
-    public function getData(): Data
-    {
-        return $this->data;
-    }
-
-    /**
-     * Set links
-     *
-     * @param Links $links
-     * @return Relationship
-     */
-    public function setLinks(Links $links): Relationship
-    {
-        $this->links = $links;
-
-        return $this;
-    }
-
-    /**
-     * Get links
-     *
-     * @return Links
-     */
-    public function getLinks(): Links
-    {
-        return $this->links;
-    }
-
-    /**
      * @inheritDoc
      */
     public function fromArray(array $data): AbstractElement
@@ -121,9 +74,7 @@ class Relationship extends AbstractElement
         }
 
         if (!empty($data['data'])) {
-            $dataElement = new Data();
-            $dataElement->fromArray($data['data']);
-            $this->setData($dataElement);
+            $this->setData(Data::createFromArray($data['data']));
         }
 
         return $this;
@@ -136,12 +87,12 @@ class Relationship extends AbstractElement
     {
         $array = [];
         
-        if (null !== $this->links) {
-            $array[$this->links->getKey()] = $this->links->getValue();
+        if (null !== $this->getLinks()) {
+            $array[$this->getLinks()->getKey()] = $this->getLinks()->getValue();
         }
 
-        if (null !== $this->data) {
-            $array[$this->data->getKey()] = $this->data->getValue();
+        if (null !== $this->getData()) {
+            $array[$this->getData()->getKey()] = $this->getData()->getValue();
         }
 
         return $array;

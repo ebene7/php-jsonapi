@@ -53,5 +53,5 @@ use PHPUnit\TextUI\ResultPrinter;
 
 $request = Request::createFromGlobals();
 
-print_r($request);
+//print_r($request);
 

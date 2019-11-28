@@ -5,6 +5,7 @@ namespace E7\JsonApi\Document;
 use E7\JsonApi\Document\Attributes;
 use E7\JsonApi\Document\Links;
 use E7\JsonApi\Document\Relationships;
+use E7\JsonApi\Document\Traits\LinksAwareTrait;
 
 /**
  * Class Resource
@@ -12,15 +13,14 @@ use E7\JsonApi\Document\Relationships;
  */
 class Resource extends ResourceIdentifier
 {
+    use LinksAwareTrait;
+
     /** @var Attributes */
     private $attributes;
     
     /** @var Relationships */
     private $relationships;
-    
-    /** @var Links */
-    private $links;
-    
+
     /**
      * Constructor
      * 
@@ -40,7 +40,7 @@ class Resource extends ResourceIdentifier
         parent::__construct($type, $id);
         $this->attributes = $attributes;
         $this->relationships = $relationships;
-        $this->links = $links;
+        $this->setLinks($links);
     }
 
     /**
@@ -95,29 +95,6 @@ class Resource extends ResourceIdentifier
     public function getRelationships(): Relationships
     {
         return $this->relationships;
-    }
-
-    /**
-     * Set links
-     *
-     * @param Links $links
-     * @return Resource
-     */
-    public function setLinks(Links $links): Resource
-    {
-        $this->links = $links;
-
-        return $this;
-    }
-
-    /**
-     * Get links
-     *
-     * @return Links
-     */
-    public function getLinks(): Links
-    {
-        return $this->links;
     }
 
     /**

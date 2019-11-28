@@ -2,12 +2,16 @@
 
 namespace E7\JsonApi\Document;
 
+use E7\JsonApi\Document\Traits\MetaAwareTrait;
+
 /**
  * Class Link
  * @package E7\JsonApi\Document
  */
 class Link extends AbstractElement
 {
+    use MetaAwareTrait;
+
     const REL_FIRST = 'first';
     const REL_LAST = 'last';
     const REL_NEXT = 'next';
@@ -20,9 +24,6 @@ class Link extends AbstractElement
 
     /** @var string */
     private $url;
-
-    /** @var Meta */
-    private $meta;
 
     /**
      * Constructor
@@ -98,29 +99,6 @@ class Link extends AbstractElement
     public function getUrl(): string
     {
         return $this->url;
-    }
-
-    /**
-     * Set meta
-     *
-     * @param Meta $meta
-     * @return Link
-     */
-    public function setMeta(Meta $meta): Link
-    {
-        $this->meta = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Get meta
-     *
-     * @return Meta
-     */
-    public function getMeta(): Meta
-    {
-        return $this->meta;
     }
 
     /**

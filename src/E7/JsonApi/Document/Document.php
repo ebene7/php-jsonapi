@@ -2,6 +2,9 @@
 
 namespace E7\JsonApi\Document;
 
+use E7\JsonApi\Document\Traits\DataAwareTrait;
+use E7\JsonApi\Document\Traits\LinksAwareTrait;
+use E7\JsonApi\Document\Traits\MetaAwareTrait;
 
 /**
  * Class Document
@@ -9,35 +12,21 @@ namespace E7\JsonApi\Document;
  */
 class Document extends AbstractElement
 {
+    use DataAwareTrait;
+    use LinksAwareTrait;
+    use MetaAwareTrait;
+
     /**
      * an object describing the server’s implementation
      * @var JsonApi 
      */
     private $jsonApi;
-    
-    /**
-     * the document’s 'primary data'
-     * @var Data 
-     */
-    private $data;
-    
+
     /**
      * an array of error objects
      * @var Errors
      */
     private $errors;
-    
-    /**
-     * a meta object that contains non-standard meta-information
-     * @var Meta
-     */
-    private $meta;
-    
-    /**
-     * a links object related to the primary data
-     * @var Links
-     */
-    private $links;
     
     /**
      * an array of resource objects that are related to the primary data and/or 
@@ -64,10 +53,10 @@ class Document extends AbstractElement
         Included $included = null,
         JsonApi $jsonApi = null
     ) {
-        $this->data = $data;
+        $this->setData($data);
         $this->errors = $errors;
-        $this->meta = $meta;
-        $this->links = $links;
+        $this->setMeta($meta);
+        $this->setLinks($links);
         $this->included = $included;
         $this->jsonApi = $jsonApi;
     }
@@ -80,27 +69,7 @@ class Document extends AbstractElement
         return 'document';
     }
 
-    /**
-     * Set data
-     * 
-     * @param Data $data
-     * @return Document
-     */
-    public function setData(Data $data): Document
-    {
-        $this->data = $data;
-        return $this;
-    }
 
-    /**
-     * Get data
-     * 
-     * @return Data|null
-     */
-    public function getData(): Data
-    {
-        return $this->data;
-    }
 
     /**
      * Set errors
@@ -122,73 +91,6 @@ class Document extends AbstractElement
     public function getErrors(): Errors
     {
         return $this->errors;
-    }
-
-    /**
-     * Set meta
-     * 
-     * @param Meta $meta
-     * @return Document
-     */
-    public function setMeta(Meta $meta): Document
-    {
-        $this->meta = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Get meta
-     * 
-     * @return Meta|null
-     */
-    public function getMeta(): Meta
-    {
-        return $this->meta;
-    }
-
-    /**
-     * Set links
-     *
-     * @param Links $links
-     * @return Document
-     */
-    public function setLinks(Links $links): Document
-    {
-        $this->links = $links;
-
-        return $this;
-    }
-
-    /**
-     * Get links
-     *
-     * @return Links|null
-     */
-    public function getLinks()
-    {
-        return $this->links;
-    }
-
-    public function addLink($relation, string $url = null, Meta $meta = null)
-    {
-        if (is_string($relation) && !empty($url)) {
-            // @TODO: extend factory
-            $relation = new Link($relation, $url, $meta);
-        }
-
-        if (!$relation instanceof Link) {
-            throw new \InvalidArgumentException('');
-        }
-
-        if (null === $this->getLinks()) {
-            // @TODO: use factory
-            $this->setLinks(new Links());
-        }
-
-        $this->getLinks()->add($relation);
-
-        return $this;
     }
 
     /**

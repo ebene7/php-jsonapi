@@ -3,6 +3,8 @@
 namespace E7\JsonApi\Document;
 
 use E7\JsonApi\Document\Error\Source;
+use E7\JsonApi\Document\Traits\LinksAwareTrait;
+use E7\JsonApi\Document\Traits\MetaAwareTrait;
 
 /**
  * Class Error
@@ -10,6 +12,9 @@ use E7\JsonApi\Document\Error\Source;
  */
 class Error extends AbstractElement
 {
+    use LinksAwareTrait;
+    use MetaAwareTrait;
+
     /**
      * a unique identifier for this particular occurrence of the problem
      * @var string 
@@ -42,20 +47,6 @@ class Error extends AbstractElement
      * @var string 
      */
     private $detail;
-
-    /**
-     * a links object containing the following members:
-     * - about: a link that leads to further details about this particular 
-     *   occurrence of the problem
-     * @var Links 
-     */
-    private $links;
-
-    /**
-     * a meta object containing non-standard meta-information about the error
-     * @var Meta 
-     */
-    private $meta;
 
     /**
      * an object containing references to the source of the error, optionally
@@ -189,52 +180,6 @@ class Error extends AbstractElement
     public function getDetail(): string
     {
         return $this->detail;
-    }
-
-    /**
-     * Set links
-     *
-     * @param Links $links
-     * @return Error
-     */
-    public function setLinks(Links $links): Error
-    {
-        $this->links = $links;
-
-        return $this;
-    }
-
-    /**
-     * Get links
-     *
-     * @return Links
-     */
-    public function getLinks(): Links 
-    {
-        return $this->links;
-    }
-
-    /**
-     * Set meta
-     *
-     * @param Meta $meta
-     * @return Error
-     */
-    public function setMeta(Meta $meta): Error
-    {
-        $this->meta = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Get meta
-     *
-     * @return Meta
-     */
-    public function getMeta(): Meta
-    {
-        return $this->meta;
     }
 
     /**
