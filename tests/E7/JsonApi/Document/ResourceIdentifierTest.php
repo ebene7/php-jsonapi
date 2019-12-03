@@ -52,6 +52,6 @@ class ResourceIdentifierTest extends ElementTestCase
     
     public function testGetKey()
     {
-        $this->doTestGetKey(new ResourceIdentifier());
+        $this->doTestGetKey(new ResourceIdentifier(), 'resourceidentifier');
     }
 }

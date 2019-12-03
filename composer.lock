@@ -4,8 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0953c4a7c20cd7a26603a37c696d68fb",
-    "packages": [],
+    "content-hash": "48b9b4d9f70f78b27a8edb1a97c329ec",
+    "packages": [
+        {
+            "name": "ebene7/php-lib",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ebene7/php-lib.git",
+                "reference": "4b5022d0e990b1642ef3927e8345a65d1e05e778"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ebene7/php-lib/zipball/4b5022d0e990b1642ef3927e8345a65d1e05e778",
+                "reference": "4b5022d0e990b1642ef3927e8345a65d1e05e778",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "6.5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "E7\\": "src/E7"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Daniel Barty",
+                    "email": "daniel@ebene7.com"
+                }
+            ],
+            "description": "E7 PHP Library",
+            "homepage": "https://github.com/ebene7/php-lib",
+            "time": "2019-11-15T14:55:06+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -60,6 +98,43 @@
                 "instantiate"
             ],
             "time": "2015-06-14T21:17:01+00:00"
+        },
+        {
+            "name": "ebene7/phpunit",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ebene7/phpunit.git",
+                "reference": "28684880d6641862392ec1b91bcc93858ab5e808"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ebene7/phpunit/zipball/28684880d6641862392ec1b91bcc93858ab5e808",
+                "reference": "28684880d6641862392ec1b91bcc93858ab5e808",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "6.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "E7\\": "src/E7/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Daniel Barty",
+                    "email": "daniel@ebene7.com"
+                }
+            ],
+            "description": "E7 PHPUnit Utilities",
+            "homepage": "https://github.com/ebene7/phpunit",
+            "time": "2019-11-03T16:12:28+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1375,16 +1450,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.12.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
+                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
-                "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
                 "shasum": ""
             },
             "require": {
@@ -1396,7 +1471,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -1429,7 +1504,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2019-11-27T13:56:44+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -1473,31 +1548,29 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "88e6d84706d09a236046d686bbea96f07b3a34f4"
+                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/88e6d84706d09a236046d686bbea96f07b3a34f4",
-                "reference": "88e6d84706d09a236046d686bbea96f07b3a34f4",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/573381c0a64f155a0d9a23f4b0c797194805b925",
+                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.3 || ^7.0",
                 "symfony/polyfill-ctype": "^1.8"
             },
+            "conflict": {
+                "vimeo/psalm": "<3.6.0"
+            },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.36 || ^7.5.13"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Webmozart\\Assert\\": "src/"
@@ -1519,16 +1592,19 @@
                 "check",
                 "validate"
             ],
-            "time": "2019-08-24T08:43:50+00:00"
+            "time": "2019-11-24T13:36:37+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ebene7/php-lib": 20,
+        "ebene7/phpunit": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=7.0.0"
     },
     "platform-dev": []
 }

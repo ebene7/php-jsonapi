@@ -129,8 +129,8 @@ class DocumentTest extends ElementTestCase
         $element->fromArray($data);
 
 //        print_r($element);
-        print_r($element->toArray());
-        print_r(json_encode($element));
+//        print_r($element->toArray());
+//        print_r(json_encode($element));
         
         
     }

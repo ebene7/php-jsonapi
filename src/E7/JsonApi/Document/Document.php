@@ -69,8 +69,6 @@ class Document extends AbstractElement
         return 'document';
     }
 
-
-
     /**
      * Set errors
      * 

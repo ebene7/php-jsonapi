@@ -35,4 +35,12 @@ class Meta extends Collection
     {
         return $element->getKey();
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function accept(ElementInterface $element): bool
+    {
+        return $element instanceof KeyValue;
+    }
 }

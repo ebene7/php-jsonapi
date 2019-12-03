@@ -38,4 +38,12 @@ trait MetaAwareTrait
     {
         return $this->meta;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasMeta()
+    {
+        return null !== $this->meta;
+    }
 }
